@@ -114,7 +114,16 @@ var trackable = function ( entity ) {
   self.subscribe( "any", function ( newData ) {
     delta.apply( self, [ self.__original, newData ] );
     if ( typeof self[ "save" ] === "function" ) {
-      self.save();
+      var query = self.save();
+      if ( is.an.object( query ) && typeof query[ "execute" ] === "function" ) {
+        query.execute().then( function () {
+          if ( typeof self[ "emit" ] === "function" ) {
+            self.emit( "save" );
+          }
+        } ).fail( function ( error ) {
+          self.emit( "save", error );
+        } );
+      }
     }
   } );
 
