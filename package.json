@@ -6,6 +6,10 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SPEAKUI/sc-trackable"
+  },
   "author": "David Tsuji",
   "license": "MIT",
   "devDependencies": {
